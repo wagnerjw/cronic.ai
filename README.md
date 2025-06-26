@@ -16,17 +16,45 @@ _A cron-scheduler for AI agents built with **LlamaIndex AgentWorkflow**_
 
 ---
 
-## 🏗 Repo layout
+# 🏗 Repository Layout
 
-apps/
-└─ ui-nextjs/ # Next.js 15 + ReactFlow canvas
-supabase/
-└─ migrations/ # flows, flow_versions, runs, data_sources tables
-edge/
-├─ schedule_flow/ # inserts flow_version + pg_cron job
-└─ ingest_docs/ # splits / embeds docs → pgvector
-runner/
-└─ lambda/ # Python 3.12, LlamaIndex, tool wrappers
+`````text
+cronic-ai/
+├─ apps/
+│  └─ ui-nextjs/               # Next.js 15 front-end (React Flow canvas + inspector)
+│     ├─ components/           # AgentNode, AccessoryNode, side panels
+│     ├─ lib/                  # JSON-schemas, helpers
+│     ├─ app/                  # App-Router pages
+│     └─ tailwind.config.js
+│
+├─ supabase/
+│  ├─ migrations/              # SQL files for tables & RLS (flows, runs, data_sources)
+│  └─ README.md                # psql / supabase CLI instructions
+│
+├─ edge/                       # Supabase Edge Functions
+│  ├─ schedule_flow/           # POST / schedule-flow → creates flow_version + cron job
+│  │   ├─ index.ts
+│  │   └─ deno.json
+│  └─ ingest_docs/             # POST / ingest → split + embed docs to pgvector
+│      ├─ index.ts
+│      └─ deno.json
+│
+├─ runner/                     # Serverless execution layer
+│  └─ lambda/                  # AWS Lambda (or Supabase Edge Runtime) implementation
+│      ├─ main.py              # handler: builds & runs AgentWorkflow
+│      ├─ agent_factory.py     # merges prompt, tools, memory, RAG config
+│      ├─ tools/               # sql_query_tool, chart_tool, etc.
+│      ├─ requirements.txt
+│      └─ README.md
+│
+├─ scripts/                    # Dev utilities (local pgvector ingest, test triggers)
+│
+├─ docs/                       # Diagrams, demo GIFs, product spec
+│
+├─ .env.example                # Client-side and server-side env var template
+├─ README.md                   # Project overview & quick-start
+└─ LICENSE
+
 
 ---
 
@@ -58,4 +86,4 @@ supabase db push        # or psql -f supabase/migrations/init.sql
 
 # 4 Local env vars
 cp .env.example .env
-````
+`````

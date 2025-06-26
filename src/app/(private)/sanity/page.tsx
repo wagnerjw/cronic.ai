@@ -3,11 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-export default async function AccountPage({
-  params,
-}: {
-  params: { username: string };
-}) {
+export default async function AccountPage() {
   const supabase = await createClient();
 
   // Attempt to get the currently authenticated user

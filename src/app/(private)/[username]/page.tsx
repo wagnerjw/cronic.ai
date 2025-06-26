@@ -1,7 +1,11 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
-export default async function AccountPage({params,}: {params: { username: string };}) {
+export default async function AccountPage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
   // Supabase Auth Check
   // This function checks if the user is authenticated and redirects if not
   // It also checks if the authenticated user's username matches the URL slug
@@ -16,7 +20,7 @@ export default async function AccountPage({params,}: {params: { username: string
   // Pull the username from Supabase user metadata
   const username = data.user.user_metadata?.username;
   // await Params, then Pull the username from the URL slug
-  const urlParams = params;
+  const urlParams = await params;
   const urlUsername = urlParams.username;
   // If the authenticated user's username doesn't match the URL slug, redirect to home
   if (username !== urlUsername) {
