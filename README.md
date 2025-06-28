@@ -18,7 +18,7 @@ _A cron-scheduler for AI agents built with **LlamaIndex AgentWorkflow**_
 
 # 🏗 Repository Layout
 
-`````text
+````text
 cronic-ai/
 ├─ apps/
 │  └─ ui-nextjs/               # Next.js 15 front-end (React Flow canvas + inspector)
@@ -60,7 +60,6 @@ cronic-ai/
 
 ## ⚡ Quick start (front-end only)
 
-````bash
 # 1  Clone & install
 git clone https://github.com/<you>/cronic-ai.git
 cd cronic-ai/apps/ui-nextjs
@@ -86,4 +85,5 @@ supabase db push        # or psql -f supabase/migrations/init.sql
 
 # 4 Local env vars
 cp .env.example .env
-`````
+---
+````
