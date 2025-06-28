@@ -16,9 +16,9 @@ _A cron-scheduler for AI agents built with **LlamaIndex AgentWorkflow**_
 
 ---
 
-# 🏗 Repository Layout
+## 🏗 Repository Layout
 
-````text
+```text
 cronic-ai/
 ├─ apps/
 │  └─ ui-nextjs/               # Next.js 15 front-end (React Flow canvas + inspector)
@@ -55,35 +55,41 @@ cronic-ai/
 ├─ README.md                   # Project overview & quick-start
 └─ LICENSE
 
+```
 
 ---
 
 ## ⚡ Quick start (front-end only)
 
-# 1  Clone & install
+````text
+### 1  Clone & install
 git clone https://github.com/<you>/cronic-ai.git
 cd cronic-ai/apps/ui-nextjs
 pnpm install
 
-# 2  Dev server
+### 2  Dev server
 pnpm dev
 
-# 3  Open http://localhost:3000
+### 3  Open http://localhost:3000
 drag an Agent node, add docs & RAG config, export JSON.(No backend required for this step.)```
+````
 
 ---
 
 🐘 Supabase setup
-# 1 Create project on app.supabase.com
-# 2 Enable extensions
+
+```text
+### 1 Create project on app.supabase.com
+
+### 2 Enable extensions
 supabase sql "create extension if not exists pgvector;"
 supabase sql "create extension if not exists pg_net;"
 supabase sql "create extension if not exists pg_cron;"
 
-# 3 Apply migrations
+### 3 Apply migrations
 supabase db push        # or psql -f supabase/migrations/init.sql
 
-# 4 Local env vars
+###4 Local env vars
 cp .env.example .env
 ---
-````
+```
