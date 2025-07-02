@@ -7,7 +7,6 @@ import {
   applyNodeChanges,
   Background,
   Connection,
-  Controls,
   Edge,
   Node,
   ReactFlow,
@@ -64,7 +63,6 @@ export default function FlowPage() {
           onConnect={onConnect}
           fitView
         >
-          <Controls />
           <Background />
         </ReactFlow>
       </div>

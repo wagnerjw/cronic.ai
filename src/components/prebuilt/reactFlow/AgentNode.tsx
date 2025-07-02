@@ -3,7 +3,7 @@ import { Handle, Position } from '@xyflow/react';
 
 export default function AgentNode() {
   return (
-    <div className="rounded-lg bg-white px-4 py-3 text-center shadow-md">
+    <div className="bg-main border-1 border-border shadow-shadow p-2">
       {/* 1. input (left) */}
       <Handle
         type="target"
@@ -37,7 +37,7 @@ export default function AgentNode() {
       />
 
       {/* node body */}
-      <strong>Whatever</strong>
+      <strong>AgentNode</strong>
     </div>
   );
 }
