@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
-export default async function AccountPage({
+export default async function AgentPage({
   params,
 }: {
   params: Promise<{ username: string }>;
@@ -32,7 +32,7 @@ export default async function AccountPage({
   return (
     <>
       <div className="flex flex-col items-center justify-center space-y-3 h-screen">
-        <p>[AGENT ID] Page</p>
+        <p>Agent ID screen</p>
       </div>
     </>
   );
