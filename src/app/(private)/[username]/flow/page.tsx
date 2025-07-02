@@ -8,8 +8,6 @@ import {
   Controls,
   Edge,
   MiniMap,
-  Node,
-  Position,
   ReactFlow,
   ReactFlowProvider,
 } from '@xyflow/react';
@@ -18,16 +16,16 @@ import { useCallback, useState } from 'react';
 
 export default function FlowPage() {
   /* ---------- minimal starter state ---------- */
-  const [nodes, setNodes] = useState<Node[]>([
-    {
-      id: 'agent-1',
-      type: 'default', // <-- REQUIRED
-      position: { x: 0, y: 0 },
-      data: { label: 'FunctionAgent' },
-      sourcePosition: Position.Right, // optional handle helpers
-      targetPosition: Position.Left,
-    },
-  ]);
+  // const [nodes, setNodes] = useState<Node[]>([
+  //   {
+  //     id: 'agent-1',
+  //     type: 'default', // <-- REQUIRED
+  //     position: { x: 0, y: 0 },
+  //     data: { label: 'FunctionAgent' },
+  //     sourcePosition: Position.Right, // optional handle helpers
+  //     targetPosition: Position.Left,
+  //   },
+  // ]);
 
   const [edges, setEdges] = useState<Edge[]>([]);
 
