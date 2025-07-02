@@ -1,49 +1,69 @@
-// src/app/flow/page.tsx
 'use client';
 
+import AgentNode from '@/components/prebuilt/reactFlow/AgentNode';
 import {
   addEdge,
+  applyEdgeChanges,
+  applyNodeChanges,
   Background,
   Connection,
   Controls,
   Edge,
-  MiniMap,
+  Node,
   ReactFlow,
   ReactFlowProvider,
 } from '@xyflow/react';
-import '@xyflow/react/dist/style.css'; // <-- make sure this import is here
+import '@xyflow/react/dist/style.css';
 import { useCallback, useState } from 'react';
 
 export default function FlowPage() {
-  /* ---------- minimal starter state ---------- */
-  // const [nodes, setNodes] = useState<Node[]>([
-  //   {
-  //     id: 'agent-1',
-  //     type: 'default', // <-- REQUIRED
-  //     position: { x: 0, y: 0 },
-  //     data: { label: 'FunctionAgent' },
-  //     sourcePosition: Position.Right, // optional handle helpers
-  //     targetPosition: Position.Left,
-  //   },
-  // ]);
-
+  const [nodes, setNodes] = useState<Node[]>([
+    { id: 'A', type: 'agent', position: { x: 200, y: 120 }, data: {} },
+  ]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
+  const onNodesChange = useCallback(
+    (changes: import('@xyflow/react').NodeChange[]) =>
+      setNodes((nds) => applyNodeChanges(changes, nds)),
+    []
+  );
+  const onEdgesChange = useCallback(
+    (changes: import('@xyflow/react').EdgeChange[]) =>
+      setEdges((eds) => applyEdgeChanges(changes, eds)),
+    []
+  );
   const onConnect = useCallback(
-    (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection | Edge) =>
+      setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
     []
   );
 
+  /* always re-created each render → fresh state */
+  const exportJson = () => {
+    const data = { nodes, edges };
+    console.log('Flow JSON:', JSON.stringify(data, null, 2));
+  };
+
   return (
     <ReactFlowProvider>
+      {/* Export button */}
+      <button
+        onClick={exportJson}
+        className="absolute right-4 top-4 z-50 rounded bg-blue-600 px-3 py-1 text-sm text-white shadow"
+      >
+        Export JSON
+      </button>
+
       <div className="h-screen w-full">
         <ReactFlow
           nodes={nodes}
           edges={edges}
+          nodeTypes={{ agent: AgentNode }}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          fitView // auto-centers first render
+          fitView
         >
-          <MiniMap />
           <Controls />
           <Background />
         </ReactFlow>
